@@ -11,20 +11,20 @@ Function Set-VMGuestWindowsIp {
 	.PARAMETER IP
 	The IP of the Windows Network Adapter
 	.PARAMETER Netmask
-    The Netmask of the Windows Network Adapter
-    .PARAMETER Gateway
-    The Gateway of the Windows Network Adapter
+	The Netmask of the Windows Network Adapter
+	.PARAMETER Gateway
+	The Gateway of the Windows Network Adapter
 	.PARAMETER GuestUser
-    The Windows Guest User Account
+	The Windows Guest User Account
 	.PARAMETER GuestPass
-    The Windows Guest User Account Password
-    .PARAMETER SetDns
-    True or False, set the DNS Address to the Hardcoded DNS
+	The Windows Guest User Account Password
+	.PARAMETER SetDns
+	True or False, set the DNS Address to the Hardcoded DNS
     
 	.EXAMPLE
-    PS C:\> UpdateIp.ps1 -VM VMNAME -Adapter "Local Network Connection" -GuestUser "admin" -GuestPass "pass" -SetDns $true
-    .EXAMPLE 
-    PS C:\> UpdateIp.ps1 -VM VMNAME -Adapter "Local Network Connection" -GuestUser "admin" -GuestPass "pass" -SetDns $true -IP "192.168.0.5" -Netmask "255.255.255.0" -Gateway "192.168.0.1"
+	PS C:\> UpdateIp.ps1 -VM VMNAME -Adapter "Local Network Connection" -GuestUser "admin" -GuestPass "pass" -SetDns $true
+	.EXAMPLE 
+	PS C:\> UpdateIp.ps1 -VM VMNAME -Adapter "Local Network Connection" -GuestUser "admin" -GuestPass "pass" -SetDns $true -IP "192.168.0.5" -Netmask "255.255.255.0" -Gateway "192.168.0.1"
 
 	.NOTES
 	Author                                    : Jase McCarty
