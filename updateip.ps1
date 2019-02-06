@@ -76,5 +76,5 @@ $vmList = Get-Content /Users/jase/PowerCLI/serverlist.txt
 
 foreach ($VM in $vmlist) {
  
-    Set-VMGuestWindowsDNS -VM $VM -GuestUser "admin" -GuestPass "pass" -SetDns $true
+    Set-VMGuestWindowsDNS -VM $VM -Adapter "Local Area Connection" -GuestUser "admin" -GuestPass "pass" -SetDns $true
 }
