@@ -100,5 +100,5 @@ Modify-ScsiController -VM "OldVM" -Type VirtualLsiLogicSAS
 $CurrentVMs = Get-VM | Get-ScsiController| Select-Object Parent,Type | Where-Object {$_.Type -eq "VirtualBusLogic"}
 Foreach ($WorkingVm in $CurrentVMs) {
 	# Update the working VM to an alternate adapter
-	Modify-ScsiController -VM $WorkingVm -Type VirtualLsiLogic
+	Modify-ScsiController -VM $WorkingVm.Parent -Type VirtualLsiLogic
 }
