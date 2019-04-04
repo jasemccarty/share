@@ -1,4 +1,5 @@
 
+
 Function Modify-ScsiController {
 
 	<#
@@ -52,7 +53,7 @@ Function Modify-ScsiController {
 				$CurrentVM | Shutdown-VMGuest -Confirm:$false
 			} else {
 				# Power the VM off hard
-				$CurrentVM | Stop-VMGuest -Confirm:$false
+				$CurrentVM | Stop-VM -Confirm:$false
 			}
 
 			# Let's wait until the VM is powered off before attempting to make a change
@@ -74,6 +75,8 @@ Function Modify-ScsiController {
 		# What was the original state of the VM?
 		If ($VmPowerState -eq "PoweredOn") {
 			# Start the VM
+			Write-Host "$CurrentVM was previously powered on:" -ForegroundColor Yellow -NoNewline
+			Write-Host "Powering On"
 			Start-VM -VM $CurrentVM | Out-Null
 		}
 
