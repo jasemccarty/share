@@ -1,5 +1,3 @@
-
-
 Function Modify-ScsiController {
 
 	<#
@@ -21,7 +19,7 @@ Function Modify-ScsiController {
 	.NOTES
 	Author                                    : Jase McCarty
 	Version                                   : 0.2
-        Requires                                  : PowerCLI 6.5
+    Requires                                  : PowerCLI 6.5
 	==========Tested Against Environment==========
 	VMware vSphere Hypervisor(ESXi) Version   : 6.7
 	VMware vCenter Server Version             : 6.7
@@ -73,7 +71,8 @@ Function Modify-ScsiController {
 		Write-Host "Proceeding"
 
 		# Change the current type to the new type
-		$ScsiController | Set-ScsiController -Type $Type -Confirm:$false | Out-Null
+		Write-Host "Changing the SCSI Controller"
+		$ScsiController | Set-ScsiController -Type $Type -Confirm:$false #| Out-Null
 
 		# What was the original state of the VM?
 		If ($VmPowerState -eq "PoweredOn") {
