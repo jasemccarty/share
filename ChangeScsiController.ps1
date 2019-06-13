@@ -4,21 +4,24 @@ Function Modify-ScsiController {
 
 	<#
 	.SYNOPSIS
-    Update the SCSI controller
-    .DESCRIPTION
-    Update the SCSI controller
-    .PARAMETER VM
+        Update the SCSI controller
+
+        .DESCRIPTION
+        Update the SCSI controller
+
+        .PARAMETER VM
 	The VM to have the controller changed
+
 	.PARAMETER ControllerType
 	The Type of Controller to change to  
 	
 	.EXAMPLE
-	PS C:\> Update-ScsiController -WITNESSVM $VM
+	PS C:\> Update-ScsiController -VM $VM
 
 	.NOTES
 	Author                                    : Jase McCarty
-	Version                                   : 0.1
-    Requires                                  : PowerCLI 6.5
+	Version                                   : 0.2
+        Requires                                  : PowerCLI 6.5
 	==========Tested Against Environment==========
 	VMware vSphere Hypervisor(ESXi) Version   : 6.7
 	VMware vCenter Server Version             : 6.7
@@ -33,7 +36,7 @@ Function Modify-ScsiController {
 	)
 
 	# Retrive the Current VM
-    $CurrentVM = Get-VM -Name $VM
+        $CurrentVM = Get-VM -Name $VM
 
 	# Retrieve the Current Controller Type
 	$ScsiController = $CurrentVM | Get-ScsiController
@@ -90,15 +93,15 @@ Function Modify-ScsiController {
 
 # Examples
 
-# Change to LSI Logic Parallel
-Modify-ScsiController -VM "ReallyOldVM" -Type VirtualLsiLogic
+# Change to VMware Paravirtual
+Modify-ScsiController -VM "ReallyOldVM" -Type Paravirtual
 
 # Change to LSI Logic SAS
 Modify-ScsiController -VM "OldVM" -Type VirtualLsiLogicSAS
 
-# Change all the VM's that have the BusLogic Adapter to the LSI Logic Parallel Adapter
-$CurrentVMs = Get-VM | Get-ScsiController| Select-Object Parent,Type | Where-Object {$_.Type -eq "VirtualBusLogic"}
+# Change all the VM's that have the BusLogic Adapter to the VMware Paravirtual
+$CurrentVMs = Get-VM | Get-ScsiController| Select-Object Parent,Type | Where-Object {$_.Type -eq "Paravirtual"}
 Foreach ($WorkingVm in $CurrentVMs) {
 	# Update the working VM to an alternate adapter
-	Modify-ScsiController -VM $WorkingVm.Parent -Type VirtualLsiLogic
+	Modify-ScsiController -VM $WorkingVm.Parent -Type Paravirtual
 }
