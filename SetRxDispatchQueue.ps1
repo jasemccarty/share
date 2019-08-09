@@ -26,36 +26,33 @@ SetRxDispatchQueue.ps1 -VIServer <vCenter/ESXiHost> -Queue <value> -ClusterName 
   [string]$ClusterName,
 
   [Parameter(Mandatory = $true)]
+  [ValidateSet(1,2,4)]
   [Int]$Queue
 
 )
 	
-function SetRxDispatchQueue{
+Function SetRxDispatchQueue{
 Param ([string]$ESXHost,[Int]$RxQueue)
 				
-				$RxQueueVal  = Get-AdvancedSetting -Entity $ESXHost -Name "Net.TcpipRxDispatchQueues"
+	$RxQueueVal  = Get-AdvancedSetting -Entity $ESXHost -Name "Net.TcpipRxDispatchQueues"
 
-				# Display the Host this is being performed on
-				Write-Host "Host:" $ESXHost
+	# Display the Host this is being performed on
+	Write-Host "Host:" $ESXHost
 
-				# If any of these are set to the opposite, toggle the setting
-				If($RxQueueVal.value -ne $Queue){
-					# Show that host is being updated
-					Write-Host "On $ESXHost the TcpipRxDispatchQueue value is " -foregroundcolor red -backgroundcolor white
-					$RxQueueVal | Set-AdvancedSetting -Value $Queue -Confirm:$false
-					Write-Host "A reboot of host $ESXHost is required for the updates to take effect" -foregroundcolor white -backgroundcolor red 
-				}  else {
-					Write-Host "On $ESXHost the TcpipRxDispatchQueue value is already set to $Queue" -ForegroundColor green
-					Write-Host "A reboot of host $ESXHost is not required as no updates have been made" -foregroundcolor green 
-				}
-				
-				Write-Host " "
+	# If any of these are set to the opposite, toggle the setting
+	If($RxQueueVal.value -ne $Queue){
+		# Show that host is being updated
+		Write-Host "On $ESXHost the TcpipRxDispatchQueue value is $RxQueueVal " -foregroundcolor red -backgroundcolor white
+		$RxQueueVal | Set-AdvancedSetting -Value $Queue -Confirm:$false
 
+		Write-Host "A reboot of host $ESXHost is required for the updates to take effect" -foregroundcolor white -backgroundcolor red 
+	}  else {
+		Write-Host "On $ESXHost the TcpipRxDispatchQueue value is already set to $Queue" -ForegroundColor green
+		Write-Host "A reboot of host $ESXHost is not required as no updates have been made" -foregroundcolor green 
+	}		
+	Write-Host " "
 }
-
 	
-#Connect-VIServer $VIServer
-
 # If the ClusterName variable is passed, it is expected that the VIServer used will be a vCenter Server
 If ($ClusterName) {
 				
@@ -69,8 +66,6 @@ If ($ClusterName) {
 	Foreach ($ESXHost in ($Cluster |Get-VMHost | Sort-Object "Name")){
 		
 		# Execute the funtion to get/set the Rx Dispatch Queue settings
-		SetRxDispatchQueue -ESXHost $ESXHost -RxQueue $Queue
-		
+		SetRxDispatchQueue -ESXHost $ESXHost -RxQueue $Queue		
 	}
-
 } 
