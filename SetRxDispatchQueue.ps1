@@ -68,7 +68,7 @@ If ($ClusterName) {
 	# Cycle through each ESXi Host in the cluster
 	Foreach ($ESXHost in ($Cluster |Get-VMHost | Sort-Object "Name")){
 		
-		# Execute the funtion to get/set the TSO/LRO settings
+		# Execute the funtion to get/set the Rx Dispatch Queue settings
 		SetRxDispatchQueue -ESXHost $ESXHost -RxQueue $Queue
 		
 	}
