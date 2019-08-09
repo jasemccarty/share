@@ -8,7 +8,7 @@ Website: http://www.jasemccarty.com
 ===========================================================================
 
 .DESCRIPTION
-This script sets Tcpip Rx Dispatch Queue Settings for Physical NICs
+This script sets Tcpip Rx Dispatch Queue Settings for ESXi Hosts
 
 Syntax is:
 SetRxDispatchQueue.ps1 -VIServer <vCenter/ESXiHost> -Queue <value> -ClusterName <ClusterName>
