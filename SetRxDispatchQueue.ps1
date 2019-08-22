@@ -68,4 +68,7 @@ If ($ClusterName) {
 		# Execute the funtion to get/set the Rx Dispatch Queue settings
 		SetRxDispatchQueue -ESXHost $ESXHost -RxQueue $Queue		
 	}
+} else {
+		# Execute the funtion to get/set the Rx Dispatch Queue settings
+		SetRxDispatchQueue -ESXHost (Get-VMHost $VIServer) -RxQueue $Queue
 } 
