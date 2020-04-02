@@ -15,11 +15,13 @@ Function Modify-ScsiController {
 	
 	.EXAMPLE
 	PS C:\> Update-ScsiController -VM $VM
+	
+	This addresses KB: 76948 - https://kb.vmware.com/kb/76948
 
 	.NOTES
 	Author                                    : Jase McCarty
 	Version                                   : 0.2
-    Requires                                  : PowerCLI 6.5
+    	Requires                                  : PowerCLI 6.5
 	==========Tested Against Environment==========
 	VMware vSphere Hypervisor(ESXi) Version   : 6.7
 	VMware vCenter Server Version             : 6.7
